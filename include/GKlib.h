@@ -54,6 +54,7 @@
 #ifdef _WIN32
 //  #include <process.h>
   #define getpid _getpid
+  #define __thread __declspec(thread)
 #endif
 
 #if defined(__OPENMP__) 
