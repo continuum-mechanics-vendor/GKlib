@@ -4,12 +4,12 @@
 */
 
 #ifdef _WIN32
-#include "win32/adapt.h"
+//#include "win32/adapt.h"
 #else
-#include "adapt.h"
+//#include "adapt.h"
 #endif 
 
-pid_t getpid(void)
-{
-  return GetCurrentProcessId();
-}
+//pid_t getpid(void)
+//{
+//  return GetCurrentProcessId();
+//}
