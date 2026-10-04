@@ -11,9 +11,22 @@ jobs:
       matrix:
         compiler: [clang, gcc]
     steps:
+      - uses: actions/checkout@v7
+      - run: |
+          cmake -B build -DCMAKE_C_COMPILER=${{ matrix.compiler }}
+          cmake --build build
+
+  build-macos:
+    name: Use clang and gcc via "Unix Makefiles"
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [clang, gcc]
+    steps:
       - uses: actions/checkout@v4
       - run: |
-          cmake -Bbuild -DCMAKE_C_COMPILER=${{ matrix.compiler }}
+          cmake -B build -DCMAKE_C_COMPILER=${{ matrix.compiler }}
           cmake --build build
 
   build-windows-ninja:
@@ -26,12 +39,12 @@ jobs:
         # clang-cl also enables MSVC, because it has a cl.exe-like interface.
         compiler: [clang, clang-cl]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: |
           # Use Ninja because the MSBuild toolchain can only configure
           # alternative compilers via "toolsets", where only ClangCL is
           # supported.
-          cmake -Bbuild -GNinja -DCMAKE_C_COMPILER=${{ matrix.compiler }}
+          cmake -G Ninja -B build -DCMAKE_C_COMPILER=${{ matrix.compiler }}
           cmake --build build
 
   build-windows-msbuild:
@@ -45,7 +58,7 @@ jobs:
           -
           - -TClangCL
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: |
-          cmake -Bbuild ${{ matrix.toolset }}
+          cmake -B build ${{ matrix.toolset }}
           cmake --build build
