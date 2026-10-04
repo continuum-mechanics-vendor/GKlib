@@ -51,13 +51,14 @@
   #include "gkregex.h"
 #endif
 
+#ifdef _WIN32
+//  #include <process.h>
+  #define getpid _getpid
+#endif
 
 #if defined(__OPENMP__) 
 #include <omp.h>
 #endif
-
-
-
 
 #include <gk_types.h>
 #include <gk_struct.h>
