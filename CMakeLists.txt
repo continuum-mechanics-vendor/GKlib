@@ -40,4 +40,3 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ TYPE INCLUDE
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/GKlib.h TYPE INCLUDE)
 
 include(cmake/install.cmake)
-
